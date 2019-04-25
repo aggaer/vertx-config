@@ -1,0 +1,5 @@
+server:
+  name: prod
+database:
+  username: root
+  password: aggaer85747756
