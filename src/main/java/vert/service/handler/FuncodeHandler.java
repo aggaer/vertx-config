@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
 import vert.exception.BusinessException;
 
 import javax.validation.Validation;
@@ -15,8 +17,8 @@ import javax.validation.Validator;
  * @author Jerry
  * @since 2019-04-21 22:28
  **/
-public interface FuncodeHandler<Request, Response> {
-     ObjectMapper JSON_MAPPER = Json.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+public interface FuncodeHandler<Request, Response> extends Handler<Message<JsonObject>> {
+    ObjectMapper JSON_MAPPER = Json.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
     /**

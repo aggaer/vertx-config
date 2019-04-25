@@ -1,7 +1,6 @@
 package vert.service.handler;
 
 import io.netty.handler.codec.http.HttpResponseStatus;
-import io.vertx.core.Handler;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,7 @@ import java.util.Set;
  * @date 2019/4/24 14:17
  **/
 @Slf4j
-public abstract class AbstractSmsSendHandler<Request, Response> implements FuncodeHandler<Request, Response>, Handler<Message<JsonObject>> {
+public abstract class AbstractSmsSendHandler<Request, Response> implements FuncodeHandler<Request, Response> {
 
     @Override
     public void handle(Message<JsonObject> event) {
