@@ -14,6 +14,7 @@ import vert.service.handler.AbstractSmsSendHandler;
  * @since 2019-04-21 21:03
  **/
 @Slf4j
+@SuppressWarnings("unused")
 public class TransDetailHandler extends AbstractSmsSendHandler<TransSendDetailReq, JsonObject> {
     private TransSendDetailRepository sendDetailRepository;
 

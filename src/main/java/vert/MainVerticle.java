@@ -30,7 +30,6 @@ public class MainVerticle extends AbstractVerticle {
     public void start(Future<Void> startFuture) {
         ConfigRetriever retriever = loadConfigs();
         Future<JsonObject> configFuture = Future.future();
-
         retriever.getConfig(configFuture);
         configFuture.compose(config -> {
             DeploymentOptions deploymentOptions = new DeploymentOptions().setConfig(config);
