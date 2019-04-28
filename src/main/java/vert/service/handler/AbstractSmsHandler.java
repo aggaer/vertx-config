@@ -14,7 +14,7 @@ import java.util.Set;
  * @date 2019/4/24 14:17
  **/
 @Slf4j
-public abstract class AbstractSmsSendHandler<Request, Response> implements FuncodeHandler<Request, Response> {
+public abstract class AbstractSmsHandler<Request, Response> implements FuncodeHandler<Request, Response> {
 
     @Override
     public void handle(Message<JsonObject> event) {

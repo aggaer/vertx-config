@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 2019-04-21 20:49
  **/
 public class SmsSendVerticle extends AbstractVerticle {
-    private static final String DEFAULT_HANDLER_PATH = "vert.service.handler";
+    private static final String DEFAULT_HANDLER_PATH = "vert.service";
 
     @Override
     public void start() {

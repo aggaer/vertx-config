@@ -1,18 +1,16 @@
 package vert.model.repository.impl;
 
-import io.github.jklingsporn.vertx.jooq.classic.async.AsyncClassicGenericQueryExecutor;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
 import lombok.extern.slf4j.Slf4j;
-import org.jooq.Configuration;
 import vert.enums.ExceptionEnums;
 import vert.exception.BusinessException;
 import vert.model.generated.Tables;
+import vert.model.repository.BaseRepository;
 import vert.model.repository.TransSendDetailRepository;
-import vert.utils.JooqConfigUtils;
 
 import java.util.Objects;
 
@@ -23,12 +21,10 @@ import static vert.model.generated.tables.TransSendDetail.TRANS_SEND_DETAIL;
  * @since 2019/4/22 18:39
  **/
 @Slf4j
-public class TransSendDetailRepositoryImpl implements TransSendDetailRepository {
-    private AsyncClassicGenericQueryExecutor queryExecutor;
+public class TransSendDetailRepositoryImpl extends BaseRepository implements TransSendDetailRepository {
 
     public TransSendDetailRepositoryImpl(AsyncSQLClient asyncSQLClient) {
-        Configuration defaultConfig = JooqConfigUtils.getDefaultConfig();
-        queryExecutor = new AsyncClassicGenericQueryExecutor(defaultConfig, asyncSQLClient);
+        super(asyncSQLClient);
     }
 
     @Override

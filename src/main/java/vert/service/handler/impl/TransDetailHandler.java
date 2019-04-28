@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import vert.model.pojo.request.TransSendDetailReq;
 import vert.model.repository.TransSendDetailRepository;
-import vert.service.handler.AbstractSmsSendHandler;
+import vert.service.handler.AbstractSmsHandler;
 
 /**
  * @author Jerry
@@ -15,7 +15,7 @@ import vert.service.handler.AbstractSmsSendHandler;
  **/
 @Slf4j
 @SuppressWarnings("unused")
-public class TransDetailHandler extends AbstractSmsSendHandler<TransSendDetailReq, JsonObject> {
+public class TransDetailHandler extends AbstractSmsHandler<TransSendDetailReq, JsonObject> {
     private TransSendDetailRepository sendDetailRepository;
 
     public TransDetailHandler(Vertx vertx) {
