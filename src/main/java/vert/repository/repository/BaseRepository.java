@@ -1,4 +1,4 @@
-package vert.model.repository;
+package vert.repository.repository;
 
 import io.github.jklingsporn.vertx.jooq.classic.async.AsyncClassicGenericQueryExecutor;
 import io.vertx.ext.asyncsql.AsyncSQLClient;

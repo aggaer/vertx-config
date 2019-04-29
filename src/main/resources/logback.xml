@@ -3,6 +3,7 @@
   <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
 
   <logger name="org.jooq" level="DEBUG"/>
+  <logger name="org.jooq.tools.LoggerListener" level="DEBUG"/>
   <logger name="org.hibernate" level="INFO"/>
   <logger name="io.netty" level="INFO"/>
   <!-- 控制台输出 -->

@@ -1,24 +1,23 @@
-package vert.service.handler.impl.sms.channel;
+package vert.service.handler.impl.sms.channel.management;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
-import vert.model.pojo.request.SmsChannelsFetchReq;
-import vert.model.repository.YwMchChannelRepository;
-import vert.service.handler.AbstractSmsHandler;
+import vert.model.pojo.request.sms.SmsChannelsFetchReq;
+import vert.repository.repository.YwMchChannelRepository;
+import vert.service.handler.AbstractFuncodeHandler;
 
 /**
  * @author Jerry
  * @since 2019/4/28 11:05
  **/
 @SuppressWarnings("unused")
-public class ChannelsFetchHandler extends AbstractSmsHandler<SmsChannelsFetchReq, JsonArray> {
+public class ChannelsFetchHandler extends AbstractFuncodeHandler<SmsChannelsFetchReq, JsonArray> {
     private YwMchChannelRepository ywMchChannelRepository;
 
     public ChannelsFetchHandler(Vertx vertx) {
-
-        this.ywMchChannelRepository = ywMchChannelRepository;
+        ywMchChannelRepository = YwMchChannelRepository.createProxy(vertx, YwMchChannelRepository.class.getName(), null);
     }
 
     @Override
@@ -33,6 +32,6 @@ public class ChannelsFetchHandler extends AbstractSmsHandler<SmsChannelsFetchReq
 
     @Override
     public void processing(SmsChannelsFetchReq smsChannelsFetchReq, Handler<AsyncResult<JsonArray>> future) {
-
+        ywMchChannelRepository.findByConditions(smsChannelsFetchReq, future);
     }
 }

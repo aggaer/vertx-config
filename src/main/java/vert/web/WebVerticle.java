@@ -12,6 +12,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import lombok.extern.slf4j.Slf4j;
+import vert.utils.HandlerRespComposer;
 
 import java.util.Objects;
 
@@ -35,9 +36,9 @@ public class WebVerticle extends AbstractVerticle {
         Integer port = env.getJsonObject("server").getInteger("port");
         httpServer.requestHandler(router).listen(port, ar -> {
             if (ar.succeeded()) {
-                log.info("http server start success in port:{}", port);
+                startFuture.handle(Future.succeededFuture());
             } else {
-                log.error("http server start failed");
+                startFuture.handle(Future.failedFuture(ar.cause()));
             }
         });
     }
@@ -53,9 +54,13 @@ public class WebVerticle extends AbstractVerticle {
         vertx.eventBus().send(funcode, body, (Handler<AsyncResult<Message<JsonObject>>>) event -> {
             if (event.succeeded()) {
                 JsonObject result = event.result().body();
+                log.info("response body is :{}", result);
                 request.response().putHeader("Content-Type", "application/json").end(result.toBuffer());
             } else {
-                request.response().end(event.cause().getMessage());
+                Throwable cause = event.cause();
+                cause.printStackTrace();
+                log.error("Request processing failed:{}", cause.getMessage());
+                request.response().end(HandlerRespComposer.ENCAPSULATE_FAILURE_RESP.apply(cause.getMessage()).toBuffer());
             }
         });
     }

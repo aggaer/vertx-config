@@ -1,4 +1,4 @@
-package vert.model;
+package vert.repository;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Context;
@@ -9,8 +9,9 @@ import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.asyncsql.MySQLClient;
 import io.vertx.serviceproxy.ServiceBinder;
 import lombok.extern.slf4j.Slf4j;
-import vert.model.repository.SmsTemplateRepository;
-import vert.model.repository.TransSendDetailRepository;
+import vert.repository.repository.SmsTemplateRepository;
+import vert.repository.repository.TransSendDetailRepository;
+import vert.repository.repository.YwMchChannelRepository;
 
 import java.util.Objects;
 
@@ -38,6 +39,8 @@ public class DatabaseVerticle extends AbstractVerticle {
                 .register(SmsTemplateRepository.class, SmsTemplateRepository.create(asyncSQLClient));
         serviceBinder.setAddress(TransSendDetailRepository.class.getName())
                 .register(TransSendDetailRepository.class, TransSendDetailRepository.create(asyncSQLClient));
+        serviceBinder.setAddress(YwMchChannelRepository.class.getName())
+                .register(YwMchChannelRepository.class, YwMchChannelRepository.create(asyncSQLClient));
         startFuture.complete();
     }
 }

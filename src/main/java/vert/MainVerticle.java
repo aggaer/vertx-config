@@ -6,9 +6,12 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 import lombok.extern.slf4j.Slf4j;
-import vert.model.DatabaseVerticle;
+import org.apache.commons.lang3.time.StopWatch;
+import vert.repository.DatabaseVerticle;
 import vert.service.SmsSendVerticle;
 import vert.web.WebVerticle;
+
+import java.util.concurrent.TimeUnit;
 
 import static io.vertx.core.spi.resolver.ResolverProvider.DISABLE_DNS_RESOLVER_PROP_NAME;
 
@@ -28,18 +31,34 @@ public class MainVerticle extends AbstractVerticle {
 
     @Override
     public void start(Future<Void> startFuture) {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         ConfigRetriever retriever = loadConfigs();
-        Future<JsonObject> configFuture = Future.future();
-        retriever.getConfig(configFuture);
-        configFuture.compose(config -> {
-            DeploymentOptions deploymentOptions = new DeploymentOptions().setConfig(config);
-            Future<String> dbFuture = Future.future();
-            vertx.deployVerticle(new DatabaseVerticle(), deploymentOptions, dbFuture);
-            Future<String> smsFuture = Future.future();
-            vertx.deployVerticle(new SmsSendVerticle(), deploymentOptions, smsFuture);
-            Future<String> webFuture = Future.future();
-            vertx.deployVerticle(new WebVerticle(), deploymentOptions, webFuture);
-            return CompositeFuture.all(dbFuture, smsFuture, webFuture);
+        retriever.getConfig(ar -> {
+            if (ar.succeeded()) {
+                DeploymentOptions deploymentOptions = new DeploymentOptions().setConfig(ar.result());
+                Future<String> dbFuture = Future.future();
+                vertx.deployVerticle(DatabaseVerticle.class, deploymentOptions, dbFuture);
+                Future<String> smsFuture = Future.future();
+                vertx.deployVerticle(SmsSendVerticle.class, deploymentOptions, smsFuture);
+                CompositeFuture.all(dbFuture, smsFuture).setHandler(it -> {
+                    if (!it.succeeded()) {
+                        log.error("DatabaseVerticle or SmsSendVerticle start failed , cause:{}", it.cause());
+                        Future.failedFuture(it.cause());
+                    }
+                }).compose(future -> {
+                    Future<String> webFuture = Future.future();
+                    vertx.deployVerticle(WebVerticle.class, deploymentOptions.setInstances(Runtime.getRuntime().availableProcessors()), webFuture);
+                    return webFuture;
+                }).setHandler(future -> {
+                    stopWatch.split();
+                    if (future.succeeded()) {
+                        log.info("web server started success in {} sec", stopWatch.getTime(TimeUnit.MILLISECONDS) / 1000.0);
+                    } else {
+                        log.error("web server start failed , cause:{}", future.cause());
+                    }
+                });
+            }
         });
     }
 

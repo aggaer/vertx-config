@@ -71,14 +71,15 @@ public class PkgUtils {
             } else {
                 String childFilePath = childFile.getPath();
                 if (childFilePath.endsWith(".class")) {
-                    childFilePath = childFilePath.substring(childFilePath.indexOf("/classes/") + 9, childFilePath.lastIndexOf("."));
-                    childFilePath = childFilePath.replace("/", ".");
+                    childFilePath = childFilePath.substring(childFilePath.indexOf(File.separator.concat("classes").concat(File.separator)) + 9, childFilePath.lastIndexOf("."));
+                    childFilePath = childFilePath.replace(File.separator, ".");
                     myClassName.add(childFilePath);
                 }
             }
         }
         return myClassName;
     }
+
 
     public static Map<String, FuncodeHandler> initHandlerMap(String packageName, Vertx vertx) {
         Map<String, FuncodeHandler> handlerMap = new HashMap<>(32);
@@ -98,6 +99,7 @@ public class PkgUtils {
                     handlerMap.put(handler.getFuncode(), handler);
                 }
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+                e.printStackTrace();
                 throw new RuntimeException(String.format("object:%s  create failed , cause:%s", className, e.getMessage()));
             }
         }

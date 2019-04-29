@@ -8,7 +8,7 @@ import lombok.Data;
  **/
 @Data
 public abstract class BasePageReq {
-    private Integer page;
-    private Integer size;
+    private Integer page = 0;
+    private Integer size = 20;
     private String orderBy;
 }

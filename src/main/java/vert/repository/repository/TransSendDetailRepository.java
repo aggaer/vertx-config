@@ -1,16 +1,15 @@
-package vert.model.repository;
+package vert.repository.repository;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.AsyncResult;
-import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
-import vert.model.repository.impl.TransSendDetailRepositoryImpl;
+import vert.repository.repository.impl.TransSendDetailRepositoryImpl;
 
 /**
  * @author Jerry

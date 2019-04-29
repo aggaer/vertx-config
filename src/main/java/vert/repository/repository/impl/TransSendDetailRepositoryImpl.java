@@ -1,4 +1,4 @@
-package vert.model.repository.impl;
+package vert.repository.repository.impl;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import vert.enums.ExceptionEnums;
 import vert.exception.BusinessException;
 import vert.model.generated.Tables;
-import vert.model.repository.BaseRepository;
-import vert.model.repository.TransSendDetailRepository;
+import vert.repository.repository.BaseRepository;
+import vert.repository.repository.TransSendDetailRepository;
 
 import java.util.Objects;
 

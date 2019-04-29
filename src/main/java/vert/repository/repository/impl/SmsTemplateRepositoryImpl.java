@@ -1,4 +1,4 @@
-package vert.model.repository.impl;
+package vert.repository.repository.impl;
 
 import io.github.jklingsporn.vertx.jooq.classic.async.AsyncClassicGenericQueryExecutor;
 import io.vertx.core.AsyncResult;
@@ -9,7 +9,7 @@ import io.vertx.ext.asyncsql.AsyncSQLClient;
 import org.jooq.Configuration;
 import vert.enums.SmsTemplateStatusEnum;
 import vert.model.generated.Tables;
-import vert.model.repository.SmsTemplateRepository;
+import vert.repository.repository.SmsTemplateRepository;
 import vert.utils.JooqConfigUtils;
 
 import static vert.model.generated.tables.SmsTemplate.SMS_TEMPLATE;

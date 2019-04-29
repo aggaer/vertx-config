@@ -1,4 +1,4 @@
-package vert.model.repository;
+package vert.repository.repository;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.codegen.annotations.ProxyGen;
@@ -9,7 +9,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
-import vert.model.repository.impl.SmsTemplateRepositoryImpl;
+import vert.repository.repository.impl.SmsTemplateRepositoryImpl;
 
 /**
  * @author Jerry

@@ -4,23 +4,25 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import vert.utils.HandlerRespComposer;
 
 import javax.validation.ConstraintViolation;
 import java.security.InvalidParameterException;
 import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * @author Jerry
  * @date 2019/4/24 14:17
  **/
 @Slf4j
-public abstract class AbstractSmsHandler<Request, Response> implements FuncodeHandler<Request, Response> {
+public abstract class AbstractFuncodeHandler<Request, Response> implements FuncodeHandler<Request, Response> {
 
     @Override
     public void handle(Message<JsonObject> event) {
         JsonObject body = event.body();
         String funcode = body.getString("funcode");
-        log.info("SmsSendHandler.handle received msg:{}", body.encodePrettily());
+        log.info("SmsSendHandler.handle received msg:{}", body);
         Request request;
         try {
             request = parseRequest(body);
@@ -33,7 +35,7 @@ public abstract class AbstractSmsHandler<Request, Response> implements FuncodeHa
             if (ar.succeeded()) {
                 Response response = ar.result();
                 log.info("SmsSendHandler.handle succeeded,response:{}", response);
-                event.reply(response);
+                event.reply(HandlerRespComposer.ENCAPSULATE_SUCCESS_RESP.apply(response));
             } else {
                 event.fail(HttpResponseStatus.INTERNAL_SERVER_ERROR.code(), ar.cause().getMessage());
             }
@@ -41,15 +43,15 @@ public abstract class AbstractSmsHandler<Request, Response> implements FuncodeHa
     }
 
     private Request parseRequest(JsonObject jsonRequest) throws InvalidParameterException {
+        if (requestClass().getSimpleName().equals(Void.class.getSimpleName())) {
+            return null;
+        }
         Request request = JSON_MAPPER.convertValue(jsonRequest, requestClass());
         Set<ConstraintViolation<Request>> violations = VALIDATOR.validate(request);
         if (violations.size() > 0) {
-            StringBuilder errBuilder = new StringBuilder();
-            violations.forEach(violation -> errBuilder.append("invalid param:")
-                    .append(violation.getPropertyPath().toString())
-                    .append(" ; error msg:")
-                    .append(violation.getMessage()).append("\n"));
-            throw new InvalidParameterException(errBuilder.toString());
+            StringJoiner joiner = new StringJoiner(" ，", "参数不合法: ", "。");
+            violations.forEach(violation -> joiner.add(violation.getMessage()));
+            throw new InvalidParameterException(joiner.toString());
         }
         return request;
     }

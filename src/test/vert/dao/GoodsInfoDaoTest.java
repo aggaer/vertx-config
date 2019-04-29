@@ -13,14 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import vert.model.DatabaseVerticle;
-import vert.model.repository.SmsTemplateRepository;
-import vert.model.repository.TransSendDetailRepository;
+import vert.repository.DatabaseVerticle;
+import vert.repository.repository.SmsTemplateRepository;
+import vert.repository.repository.TransSendDetailRepository;
 
 /**
- * @author: Jerry
- * @create: 2019-04-21 23:07
- * @description:
+ * @author Jerry
+ * @since 2019-04-21 23:07
  **/
 @Slf4j
 @ExtendWith(VertxExtension.class)
