@@ -2,11 +2,11 @@ server:
   name: beta
   port: 10001
 dataSource:
-  host: 192.168.103.98
+  host: 127.0.0.1
   port: 3306
   maxPoolSize: 30
   username: root
-  password: $root@ipaynow_test
+  password: aggaer520
   database: sms
   connectTimeout: 10000
   queryTimeout: 8000

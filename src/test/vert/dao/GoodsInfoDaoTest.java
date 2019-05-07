@@ -1,5 +1,6 @@
 package vert.dao;
 
+import com.sun.xml.internal.ws.config.management.policy.ManagementPolicyValidator;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
 import io.vertx.config.ConfigStoreOptions;
@@ -17,10 +18,13 @@ import vert.repository.DatabaseVerticle;
 import vert.repository.repository.SmsTemplateRepository;
 import vert.repository.repository.TransSendDetailRepository;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author Jerry
  * @since 2019-04-21 23:07
  **/
+@SuppressWarnings("ALL")
 @Slf4j
 @ExtendWith(VertxExtension.class)
 class GoodsInfoDaoTest {
@@ -69,6 +73,10 @@ class GoodsInfoDaoTest {
 
     @Test
     void testClassName() {
+        ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<>();
+        map.put(13,67);
+        map.get(12);
+        System.out.println("sms.send".hashCode());
         System.out.println(SmsTemplateRepository.class.getSimpleName());
     }
 }
