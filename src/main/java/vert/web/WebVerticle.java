@@ -50,6 +50,7 @@ public class WebVerticle extends AbstractVerticle {
      */
     private void funcodeDispatcher(RoutingContext request) {
         JsonObject body = Objects.requireNonNull(request.getBodyAsJson(), "request body is null");
+        log.info("WebVerticle.funcodeDispatcher request body is:{}", request.getBodyAsJson());
         String funcode = Objects.requireNonNull(body.getString("funcode"), "missing require param:funcode");
         vertx.eventBus().send(funcode, body, (Handler<AsyncResult<Message<JsonObject>>>) event -> {
             if (event.succeeded()) {

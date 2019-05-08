@@ -238,13 +238,6 @@ public class TransSendDetailDao extends AbstractAsyncVertxDAO<TransSendDetailRec
     }
 
     /**
-     * Find records that have <code>new_report_status IN (values)</code> asynchronously
-     */
-    public Future<List<vert.model.generated.tables.pojos.TransSendDetail>> findManyByNewReportStatus(List<Boolean> values) {
-        return findManyByCondition(TransSendDetail.TRANS_SEND_DETAIL.NEW_REPORT_STATUS.in(values));
-    }
-
-    /**
      * Find records that have <code>report_status IN (values)</code> asynchronously
      */
     public Future<List<vert.model.generated.tables.pojos.TransSendDetail>> findManyByReportStatus(List<Boolean> values) {
@@ -270,6 +263,13 @@ public class TransSendDetailDao extends AbstractAsyncVertxDAO<TransSendDetailRec
      */
     public Future<List<vert.model.generated.tables.pojos.TransSendDetail>> findManyByTempCode(List<String> values) {
         return findManyByCondition(TransSendDetail.TRANS_SEND_DETAIL.TEMP_CODE.in(values));
+    }
+
+    /**
+     * Find records that have <code>new_report_status IN (values)</code> asynchronously
+     */
+    public Future<List<vert.model.generated.tables.pojos.TransSendDetail>> findManyByNewReportStatus(List<Boolean> values) {
+        return findManyByCondition(TransSendDetail.TRANS_SEND_DETAIL.NEW_REPORT_STATUS.in(values));
     }
 
     @Override

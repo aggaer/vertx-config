@@ -24,7 +24,7 @@ import vert.model.generated.tables.interfaces.ITransSendDetail;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TransSendDetail implements VertxPojo, ITransSendDetail {
 
-    private static final long serialVersionUID = 1956353920;
+    private static final long serialVersionUID = -456593334;
 
     private String  transId;
     private String  mchOrderNo;
@@ -54,11 +54,11 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
     private String  mchManager;
     private String  mchManagerDept;
     private Boolean splitCount;
-    private Boolean newReportStatus;
     private Boolean reportStatus;
     private Integer isCharge;
     private String  notifyTime;
     private String  tempCode;
+    private Boolean newReportStatus;
 
     public TransSendDetail() {}
 
@@ -91,11 +91,11 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
         this.mchManager = value.getMchManager();
         this.mchManagerDept = value.getMchManagerDept();
         this.splitCount = value.getSplitCount();
-        this.newReportStatus = value.getNewReportStatus();
         this.reportStatus = value.getReportStatus();
         this.isCharge = value.getIsCharge();
         this.notifyTime = value.getNotifyTime();
         this.tempCode = value.getTempCode();
+        this.newReportStatus = value.getNewReportStatus();
     }
 
     public TransSendDetail(
@@ -127,11 +127,11 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
         String  mchManager,
         String  mchManagerDept,
         Boolean splitCount,
-        Boolean newReportStatus,
         Boolean reportStatus,
         Integer isCharge,
         String  notifyTime,
-        String  tempCode
+        String  tempCode,
+        Boolean newReportStatus
     ) {
         this.transId = transId;
         this.mchOrderNo = mchOrderNo;
@@ -161,11 +161,11 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
         this.mchManager = mchManager;
         this.mchManagerDept = mchManagerDept;
         this.splitCount = splitCount;
-        this.newReportStatus = newReportStatus;
         this.reportStatus = reportStatus;
         this.isCharge = isCharge;
         this.notifyTime = notifyTime;
         this.tempCode = tempCode;
+        this.newReportStatus = newReportStatus;
     }
 
     @Override
@@ -477,17 +477,6 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
     }
 
     @Override
-    public Boolean getNewReportStatus() {
-        return this.newReportStatus;
-    }
-
-    @Override
-    public TransSendDetail setNewReportStatus(Boolean newReportStatus) {
-        this.newReportStatus = newReportStatus;
-        return this;
-    }
-
-    @Override
     public Boolean getReportStatus() {
         return this.reportStatus;
     }
@@ -532,6 +521,17 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
     }
 
     @Override
+    public Boolean getNewReportStatus() {
+        return this.newReportStatus;
+    }
+
+    @Override
+    public TransSendDetail setNewReportStatus(Boolean newReportStatus) {
+        this.newReportStatus = newReportStatus;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TransSendDetail (");
 
@@ -563,11 +563,11 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
         sb.append(", ").append(mchManager);
         sb.append(", ").append(mchManagerDept);
         sb.append(", ").append(splitCount);
-        sb.append(", ").append(newReportStatus);
         sb.append(", ").append(reportStatus);
         sb.append(", ").append(isCharge);
         sb.append(", ").append(notifyTime);
         sb.append(", ").append(tempCode);
+        sb.append(", ").append(newReportStatus);
 
         sb.append(")");
         return sb.toString();
@@ -610,11 +610,11 @@ public class TransSendDetail implements VertxPojo, ITransSendDetail {
         setMchManager(from.getMchManager());
         setMchManagerDept(from.getMchManagerDept());
         setSplitCount(from.getSplitCount());
-        setNewReportStatus(from.getNewReportStatus());
         setReportStatus(from.getReportStatus());
         setIsCharge(from.getIsCharge());
         setNotifyTime(from.getNotifyTime());
         setTempCode(from.getTempCode());
+        setNewReportStatus(from.getNewReportStatus());
     }
 
     /**

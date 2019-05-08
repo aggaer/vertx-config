@@ -305,16 +305,6 @@ public interface ITransSendDetail extends VertxPojo, Serializable {
     public Boolean getSplitCount();
 
     /**
-     * Setter for <code>sms.trans_send_detail.new_report_status</code>. 报送数据中心的状态：0未报送，1已报送，默认为0
-     */
-    public ITransSendDetail setNewReportStatus(Boolean value);
-
-    /**
-     * Getter for <code>sms.trans_send_detail.new_report_status</code>. 报送数据中心的状态：0未报送，1已报送，默认为0
-     */
-    public Boolean getNewReportStatus();
-
-    /**
      * Setter for <code>sms.trans_send_detail.report_status</code>.
      */
     public ITransSendDetail setReportStatus(Boolean value);
@@ -353,6 +343,16 @@ public interface ITransSendDetail extends VertxPojo, Serializable {
      * Getter for <code>sms.trans_send_detail.TEMP_CODE</code>.
      */
     public String getTempCode();
+
+    /**
+     * Setter for <code>sms.trans_send_detail.new_report_status</code>. 短信新报送状态 0/1 未报送/已报送
+     */
+    public ITransSendDetail setNewReportStatus(Boolean value);
+
+    /**
+     * Getter for <code>sms.trans_send_detail.new_report_status</code>. 短信新报送状态 0/1 未报送/已报送
+     */
+    public Boolean getNewReportStatus();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -398,11 +398,11 @@ public interface ITransSendDetail extends VertxPojo, Serializable {
         setMchManager(json.getString("mch_manager"));
         setMchManagerDept(json.getString("mch_manager_dept"));
         setSplitCount(json.getBoolean("split_count"));
-        setNewReportStatus(json.getBoolean("new_report_status"));
         setReportStatus(json.getBoolean("report_status"));
         setIsCharge(json.getInteger("is_charge"));
         setNotifyTime(json.getString("notify_time"));
         setTempCode(json.getString("TEMP_CODE"));
+        setNewReportStatus(json.getBoolean("new_report_status"));
         return this;
     }
 
@@ -438,11 +438,11 @@ public interface ITransSendDetail extends VertxPojo, Serializable {
         json.put("mch_manager",getMchManager());
         json.put("mch_manager_dept",getMchManagerDept());
         json.put("split_count",getSplitCount());
-        json.put("new_report_status",getNewReportStatus());
         json.put("report_status",getReportStatus());
         json.put("is_charge",getIsCharge());
         json.put("notify_time",getNotifyTime());
         json.put("TEMP_CODE",getTempCode());
+        json.put("new_report_status",getNewReportStatus());
         return json;
     }
 

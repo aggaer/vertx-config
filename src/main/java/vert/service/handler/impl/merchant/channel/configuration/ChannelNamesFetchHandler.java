@@ -33,6 +33,8 @@ public class ChannelNamesFetchHandler extends AbstractFuncodeHandler<Void, JsonA
 
     @Override
     public void processing(Void aVoid, Handler<AsyncResult<JsonArray>> future) {
+//        JsonObject object = new JsonObject().put("channelId", "1303").put("channelName", "聚梦");
+//        future.handle(Future.succeededFuture(new JsonArray().add(object)));
         ywMchChannelRepository.findAllChannelIdAndNames(future);
     }
 }

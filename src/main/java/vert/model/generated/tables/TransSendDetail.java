@@ -40,7 +40,7 @@ import vert.model.generated.tables.records.TransSendDetailRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TransSendDetail extends TableImpl<TransSendDetailRecord> {
 
-    private static final long serialVersionUID = 1006344155;
+    private static final long serialVersionUID = -2084344287;
 
     /**
      * The reference instance of <code>sms.trans_send_detail</code>
@@ -196,11 +196,6 @@ public class TransSendDetail extends TableImpl<TransSendDetailRecord> {
     public final TableField<TransSendDetailRecord, Boolean> SPLIT_COUNT = createField("split_count", org.jooq.impl.SQLDataType.BOOLEAN, this, "");
 
     /**
-     * The column <code>sms.trans_send_detail.new_report_status</code>. 报送数据中心的状态：0未报送，1已报送，默认为0
-     */
-    public final TableField<TransSendDetailRecord, Boolean> NEW_REPORT_STATUS = createField("new_report_status", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BOOLEAN)), this, "报送数据中心的状态：0未报送，1已报送，默认为0");
-
-    /**
      * The column <code>sms.trans_send_detail.report_status</code>.
      */
     public final TableField<TransSendDetailRecord, Boolean> REPORT_STATUS = createField("report_status", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BOOLEAN)), this, "");
@@ -219,6 +214,11 @@ public class TransSendDetail extends TableImpl<TransSendDetailRecord> {
      * The column <code>sms.trans_send_detail.TEMP_CODE</code>.
      */
     public final TableField<TransSendDetailRecord, String> TEMP_CODE = createField("TEMP_CODE", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>sms.trans_send_detail.new_report_status</code>. 短信新报送状态 0/1 未报送/已报送
+     */
+    public final TableField<TransSendDetailRecord, Boolean> NEW_REPORT_STATUS = createField("new_report_status", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BOOLEAN)), this, "短信新报送状态 0/1 未报送/已报送");
 
     /**
      * Create a <code>sms.trans_send_detail</code> table reference

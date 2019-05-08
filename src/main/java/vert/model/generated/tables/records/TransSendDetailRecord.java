@@ -28,7 +28,7 @@ import vert.model.generated.tables.interfaces.ITransSendDetail;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRecord> implements VertxPojo, ITransSendDetail {
 
-    private static final long serialVersionUID = -2066053252;
+    private static final long serialVersionUID = -90876602;
 
     /**
      * Setter for <code>sms.trans_send_detail.TRANS_ID</code>. 交易号
@@ -507,28 +507,11 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
     }
 
     /**
-     * Setter for <code>sms.trans_send_detail.new_report_status</code>. 报送数据中心的状态：0未报送，1已报送，默认为0
-     */
-    @Override
-    public TransSendDetailRecord setNewReportStatus(Boolean value) {
-        set(28, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>sms.trans_send_detail.new_report_status</code>. 报送数据中心的状态：0未报送，1已报送，默认为0
-     */
-    @Override
-    public Boolean getNewReportStatus() {
-        return (Boolean) get(28);
-    }
-
-    /**
      * Setter for <code>sms.trans_send_detail.report_status</code>.
      */
     @Override
     public TransSendDetailRecord setReportStatus(Boolean value) {
-        set(29, value);
+        set(28, value);
         return this;
     }
 
@@ -537,7 +520,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public Boolean getReportStatus() {
-        return (Boolean) get(29);
+        return (Boolean) get(28);
     }
 
     /**
@@ -545,7 +528,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public TransSendDetailRecord setIsCharge(Integer value) {
-        set(30, value);
+        set(29, value);
         return this;
     }
 
@@ -554,7 +537,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public Integer getIsCharge() {
-        return (Integer) get(30);
+        return (Integer) get(29);
     }
 
     /**
@@ -562,7 +545,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public TransSendDetailRecord setNotifyTime(String value) {
-        set(31, value);
+        set(30, value);
         return this;
     }
 
@@ -571,7 +554,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public String getNotifyTime() {
-        return (String) get(31);
+        return (String) get(30);
     }
 
     /**
@@ -579,7 +562,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public TransSendDetailRecord setTempCode(String value) {
-        set(32, value);
+        set(31, value);
         return this;
     }
 
@@ -588,7 +571,24 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
      */
     @Override
     public String getTempCode() {
-        return (String) get(32);
+        return (String) get(31);
+    }
+
+    /**
+     * Setter for <code>sms.trans_send_detail.new_report_status</code>. 短信新报送状态 0/1 未报送/已报送
+     */
+    @Override
+    public TransSendDetailRecord setNewReportStatus(Boolean value) {
+        set(32, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>sms.trans_send_detail.new_report_status</code>. 短信新报送状态 0/1 未报送/已报送
+     */
+    @Override
+    public Boolean getNewReportStatus() {
+        return (Boolean) get(32);
     }
 
     // -------------------------------------------------------------------------
@@ -640,11 +640,11 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
         setMchManager(from.getMchManager());
         setMchManagerDept(from.getMchManagerDept());
         setSplitCount(from.getSplitCount());
-        setNewReportStatus(from.getNewReportStatus());
         setReportStatus(from.getReportStatus());
         setIsCharge(from.getIsCharge());
         setNotifyTime(from.getNotifyTime());
         setTempCode(from.getTempCode());
+        setNewReportStatus(from.getNewReportStatus());
     }
 
     /**
@@ -670,7 +670,7 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
     /**
      * Create a detached, initialised TransSendDetailRecord
      */
-    public TransSendDetailRecord(String transId, String mchOrderNo, String userId, String appId, String mchId, String channelId, String requestId, String phone, String content, String channelTransId, String transDate, String transTime, String modifyTime, String acceptStatus, String acceptFailreason, String transStatus, String failreason, String businessType, String serviceType, String notifyUrl, String smsPhone, String fee, String profit, String channelNotifyTime, Boolean synFlag, String mchManager, String mchManagerDept, Boolean splitCount, Boolean newReportStatus, Boolean reportStatus, Integer isCharge, String notifyTime, String tempCode) {
+    public TransSendDetailRecord(String transId, String mchOrderNo, String userId, String appId, String mchId, String channelId, String requestId, String phone, String content, String channelTransId, String transDate, String transTime, String modifyTime, String acceptStatus, String acceptFailreason, String transStatus, String failreason, String businessType, String serviceType, String notifyUrl, String smsPhone, String fee, String profit, String channelNotifyTime, Boolean synFlag, String mchManager, String mchManagerDept, Boolean splitCount, Boolean reportStatus, Integer isCharge, String notifyTime, String tempCode, Boolean newReportStatus) {
         super(TransSendDetail.TRANS_SEND_DETAIL);
 
         set(0, transId);
@@ -701,11 +701,11 @@ public class TransSendDetailRecord extends UpdatableRecordImpl<TransSendDetailRe
         set(25, mchManager);
         set(26, mchManagerDept);
         set(27, splitCount);
-        set(28, newReportStatus);
-        set(29, reportStatus);
-        set(30, isCharge);
-        set(31, notifyTime);
-        set(32, tempCode);
+        set(28, reportStatus);
+        set(29, isCharge);
+        set(30, notifyTime);
+        set(31, tempCode);
+        set(32, newReportStatus);
     }
 
     public TransSendDetailRecord(io.vertx.core.json.JsonObject json) {

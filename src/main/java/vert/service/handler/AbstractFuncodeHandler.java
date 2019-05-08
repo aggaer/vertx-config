@@ -16,6 +16,7 @@ import java.util.StringJoiner;
  * @date 2019/4/24 14:17
  **/
 @Slf4j
+@SuppressWarnings("unused")
 public abstract class AbstractFuncodeHandler<Request, Response> implements FuncodeHandler<Request, Response> {
 
     @Override

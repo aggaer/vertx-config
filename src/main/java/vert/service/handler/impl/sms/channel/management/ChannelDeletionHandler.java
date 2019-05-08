@@ -13,7 +13,6 @@ import vert.service.handler.AbstractFuncodeHandler;
  * @since 2019/4/29 18:31
  **/
 @Slf4j
-@SuppressWarnings("unused")
 public class ChannelDeletionHandler extends AbstractFuncodeHandler<ChannelDeletionReq, Integer> {
 
     private YwMchChannelRepository ywMchChannelRepository;
